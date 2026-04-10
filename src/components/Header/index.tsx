@@ -10,11 +10,16 @@ export function Header() {
   ];
 
   return (
-    <header className="flex flex-col md:flex-row md:justify-center m-3">
-      <div className="flex flex-col md:flex-row items-center mb-4 md:mb-0 md:mr-6 drop-shadow-md"></div>
-
-      <div className="w-full md:w-auto flex flex-col items-center md:items-start">
-        <nav className="flex flex-wrap justify-center md:gap-4 mt-2">
+    <header className="w-full flex flex-col items-center m-4 pb-4">
+      <div className="w-full flex flex-col items-center md:flex-row md:justify-between md:items-center">
+        <Link
+          key="/"
+          to="/"
+          className="text-2xl md:text-left text-content drop-shadow-md leading-none mb-4 md:mb-0"
+        >
+          Padrões de Projeto
+        </Link>
+        <nav className="flex flex-wrap justify-center gap-4 md:text-right md:gap-6">
           {links.map((link) => {
             const isActive =
               location.pathname === link.to ||
@@ -25,9 +30,9 @@ export function Header() {
                 key={link.to}
                 to={link.to}
                 className={`
-                  px-2 py-1 rounded-md transition 
-                  text-2xl md:text-2xl drop-shadow-md 
-                  ${isActive ? "text-primary" : "hover:text-primary-dark text-content-secondary"}
+                  rounded-md transition
+                  text-2xl drop-shadow-md 
+                  ${isActive ? "text-content" : "hover:text-primary-dark text-content-secondary"}
                 `}
               >
                 {link.name}
