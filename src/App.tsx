@@ -4,9 +4,7 @@ import { Body } from "./components/Body";
 import { Layout } from "./components/Layout";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { Creational } from "./pages/Creational";
-import { Structural } from "./pages/Structural";
-import { Behavioral } from "./pages/Behavioral";
+import { Category } from "./pages/Category";
 
 export function App() {
   return (
@@ -17,9 +15,7 @@ export function App() {
           <Routes>
             <Route path="/*" element={<Navigate to="/inicio" replace />} />
             <Route path="/inicio" element={<Home />} />
-            <Route path="/criacionais" element={<Creational />} />
-            <Route path="/estruturais" element={<Structural />} />
-            <Route path="/comportamentais" element={<Behavioral />} />
+            <Route path="/categoria/:type" element={<Category />} />
           </Routes>
         </Body>
         <Footer />

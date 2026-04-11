@@ -1,20 +1,30 @@
+import type { Pattern } from "../../model/Pattern";
+
 interface Props {
-  title: string;
-  description: string;
+  pattern: Pattern;
 }
 
-export function Card(props: Props) {
+export function Card({ pattern }: Props) {
   return (
-    <div
-      className="w-full min-w-[340px] h-[476px] sm:min-w-[300px] sm:h-[420px]
-        overflow-hidden rounded-xl border-primary
-        bg-surface shadow-sm transition hover:shadow-md hover:-translate-y-1
-        dark:border-primary-dark dark:bg-content flex flex-col"
-    >
-      <div className="p-3 flex flex-col flex-1 justify-center text-center">
-        <h3 className="mb-1 font-bold">{props.title}</h3>
-        <p className="text-sm">{props.description}</p>
+    <div className="group w-full max-w-[360px] h-[275px] flex flex-col bg-surface border border-border p-8 transition-all hover:border-primary cursor-pointer">
+      <h3 className="text-xl font-medium text-primary-dark tracking-tight mb-4">
+        {pattern.name}
+      </h3>
+
+      <div className="flex-1">
+        <p className="text-sm leading-relaxed text-content line-clamp-5">
+          {pattern.description}
+        </p>
       </div>
+
+      <footer className="mt-1">
+        <span className="block text-[10px] uppercase tracking-widest text-content mb-2 opacity-60">
+          Use Quando
+        </span>
+        <p className="text-xs text-content leading-snug italic">
+          {pattern.useWhen}
+        </p>
+      </footer>
     </div>
   );
 }
