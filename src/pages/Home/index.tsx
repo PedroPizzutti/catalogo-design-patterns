@@ -2,12 +2,12 @@ import { Page } from "../../components/Page";
 
 export function Home() {
   return (
-    <Page title="O que são?">
+    <Page title="Padrões de Projetos">
       <section className="mx-auto px-6 py-10 space-y-3">
         <p>
-          <strong className="text-xl">
-            Padrões de Projeto (<em>Design Patterns</em>)
-          </strong>{" "}
+          <em>
+            <strong className="text-xl">Design Patterns</strong>
+          </em>{" "}
           são soluções reutilizáveis para problemas comuns no design de software
           orientado a objetos. Eles não são códigos prontos, mas modelos que
           orientam a organização de classes e objetos. A ideia foi popularizada
