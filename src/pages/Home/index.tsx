@@ -11,7 +11,7 @@ export function Home() {
           são soluções reutilizáveis para problemas comuns no design de software
           orientado a objetos. Eles não são códigos prontos, mas modelos que
           orientam a organização de classes e objetos. A ideia foi popularizada
-          pelo livro
+          pelo livro{" "}
           <em>
             "Design Patterns: Elements of Reusable Object-Oriented Software"
           </em>

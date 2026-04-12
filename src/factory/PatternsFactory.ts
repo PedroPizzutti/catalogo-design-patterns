@@ -81,9 +81,9 @@ export class PatternsFactory {
           {
             name: "Flyweight",
             description:
-              "Permite ajustar mais objetos na quantidade disponível de RAM compartilhando estados comuns.",
+              "Permite ajustar mais objetos na quantidade disponível de memória compartilhando estados comuns.",
             useWhen:
-              "Seu programa precisa gerar um número enorme de objetos e o consumo de memória RAM está se tornando um problema.",
+              "Seu programa precisa gerar um número enorme de objetos e o consumo de memória está se tornando um problema.",
           },
           {
             name: "Proxy",

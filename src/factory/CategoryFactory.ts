@@ -10,7 +10,7 @@ export class CategoryFactory {
           title: "Padrões Criacionais",
           subtitle: "Creational Patterns",
           description:
-            "abstraem o processo de instanciar objetos. Em vez de espalhar new (ou comandos de criação direta) por todo o código, esses padrões centralizam e controlam como os objetos são formados, garantindo que o sistema permaneça independente de como seus componentes são criados, compostos e representados.",
+            "abstraem o processo de instanciar objetos. Em vez de espalhar comandos de criação direta por todo o código, esses padrões centralizam e controlam como os objetos são formados, garantindo que o sistema permaneça independente de como seus componentes são criados, compostos e representados.",
         };
         break;
       case "STRUCTURAL":

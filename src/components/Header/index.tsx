@@ -4,9 +4,9 @@ export function Header() {
   const location = useLocation();
 
   const links = [
-    { name: "Criacionais", to: "/categoria/CREATIONAL" },
-    { name: "Estruturais", to: "/categoria/STRUCTURAL" },
-    { name: "Comportamentais", to: "/categoria/BEHAVIORAL" },
+    { name: "Criacionais", to: "/categoria/criacionais" },
+    { name: "Estruturais", to: "/categoria/estruturais" },
+    { name: "Comportamentais", to: "/categoria/comportamentais" },
   ];
 
   return (
