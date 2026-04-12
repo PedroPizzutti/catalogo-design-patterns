@@ -9,8 +9,8 @@ import {
 } from "../../model/PatternCategories";
 
 export function Category() {
-  const { type } = useParams();
-  const categoryType = getPatternCategory(type!);
+  const { category } = useParams();
+  const categoryType = getPatternCategory(category!);
 
   try {
     const category = CategoryFactory.create(categoryType as PatternCategories);

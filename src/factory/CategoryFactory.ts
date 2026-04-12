@@ -1,8 +1,9 @@
+import type { Category } from "../model/Category";
 import type { PatternCategories } from "../model/PatternCategories";
 import { PatternsFactory } from "./PatternsFactory";
 
 export class CategoryFactory {
-  public static create(type: PatternCategories) {
+  public static create(type: PatternCategories): Category {
     let category;
     switch (type) {
       case "CREATIONAL":

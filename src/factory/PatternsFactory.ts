@@ -1,7 +1,8 @@
+import type { Pattern } from "../model/Pattern";
 import type { PatternCategories } from "../model/PatternCategories";
 
 export class PatternsFactory {
-  public static create(type: PatternCategories) {
+  public static create(type: PatternCategories): Pattern[] {
     switch (type) {
       case "CREATIONAL":
         return [
@@ -173,6 +174,8 @@ export class PatternsFactory {
               "Você precisa avaliar sentenças em uma linguagem específica ou representar regras gramaticais como objetos.",
           },
         ];
+      default:
+        throw new Error("Categoria não mapeada!");
     }
   }
 }

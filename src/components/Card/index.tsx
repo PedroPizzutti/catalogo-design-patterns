@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Pattern } from "../../model/Pattern";
 
 interface Props {
@@ -6,7 +7,10 @@ interface Props {
 
 export function Card({ pattern }: Props) {
   return (
-    <div className="group w-full max-w-[360px] h-[275px] flex flex-col bg-surface border p-8 transition-all hover:border-primary cursor-pointer">
+    <Link
+      to={`/pattern/${pattern.name}`}
+      className="group w-full max-w-[360px] h-[275px] flex flex-col bg-surface border border-border rounded-lg p-8 transition-all hover:border-primary cursor-pointer"
+    >
       <h3 className="text-xl font-medium text-primary-dark tracking-tight mb-4">
         {pattern.name}
       </h3>
@@ -25,6 +29,6 @@ export function Card({ pattern }: Props) {
           {pattern.useWhen}
         </p>
       </footer>
-    </div>
+    </Link>
   );
 }
