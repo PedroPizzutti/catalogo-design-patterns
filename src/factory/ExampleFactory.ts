@@ -806,6 +806,190 @@ public class Main {
     }
 }
     `;
+      case "CHAIN OF RESPONSIBILITY":
+        return `
+
+// Handler
+abstract class Handler {
+
+    protected Handler next;
+
+    public Handler setNext(Handler next) {
+        this.next = next;
+        return next;
+    }
+
+    public abstract void handle(String request);
+}
+
+// Handlers concretos
+class AuthHandler extends Handler {
+
+    @Override
+    public void handle(String request) {
+        System.out.println("Checking authentication...");
+
+        if (request.contains("auth")) {
+            if (next != null) {
+                next.handle(request);
+            }
+        } else {
+            System.out.println("Authentication failed");
+        }
+    }
+}
+
+class ValidationHandler extends Handler {
+
+    @Override
+    public void handle(String request) {
+        System.out.println("Validating request...");
+
+        if (request.length() > 5) {
+            if (next != null) {
+                next.handle(request);
+            }
+        } else {
+            System.out.println("Validation failed");
+        }
+    }
+}
+
+class BusinessHandler extends Handler {
+
+    @Override
+    public void handle(String request) {
+        System.out.println("Processing business logic: " + request);
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        Handler auth = new AuthHandler();
+        Handler validation = new ValidationHandler();
+        Handler business = new BusinessHandler();
+
+        // Montando a cadeia
+        auth.setNext(validation).setNext(business);
+
+        // Requisição
+        auth.handle("auth_request_data");
+    }
+}
+
+  `;
+      case "COMMAND":
+        return `
+// Command
+interface UseCase<T> {
+    void execute(T input);
+}
+
+// Input
+class CreateOrderInput {
+    public String product;
+    public int quantity;
+
+    public CreateOrderInput(String product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+}
+
+// Receiver (quem executa a lógica)
+class OrderService {
+    public void create(String product, int quantity) {
+        System.out.println("Creating order: " + product + " x" + quantity);
+    }
+}
+
+// Concrete Command
+class CreateOrderUseCase implements UseCase<CreateOrderInput> {
+
+    private OrderService orderService;
+
+    public CreateOrderUseCase(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    @Override
+    public void execute(CreateOrderInput input) {
+        orderService.create(input.product, input.quantity);
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        OrderService service = new OrderService();
+        UseCase<CreateOrderInput> useCase = new CreateOrderUseCase(service);
+
+        // Executando o comando
+        useCase.execute(new CreateOrderInput("Notebook", 2));
+    }
+}
+  `;
+      case "ITERATOR":
+        return `
+import java.util.ArrayList;
+import java.util.List;
+
+// Iterator
+interface Iterator<T> {
+    boolean hasNext();
+    T next();
+}
+
+// Coleção
+class NameCollection {
+
+    private List<String> names = new ArrayList<>();
+
+    public void add(String name) {
+        names.add(name);
+    }
+
+    public Iterator<String> iterator() {
+        return new NameIterator();
+    }
+
+    // Implementação do Iterator
+    private class NameIterator implements Iterator<String> {
+
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index < names.size();
+        }
+
+        @Override
+        public String next() {
+            return names.get(index++);
+        }
+    }
+}
+
+// Uso
+public class Main {
+    public static void main(String[] args) {
+
+        NameCollection collection = new NameCollection();
+        collection.add("Pedro");
+        collection.add("Maria");
+        collection.add("João");
+
+        Iterator<String> iterator = collection.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+    `;
       default:
         throw new Error("Categoria não mapeada!");
     }

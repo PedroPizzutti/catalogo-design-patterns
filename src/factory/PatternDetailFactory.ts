@@ -149,6 +149,42 @@ export class PatternDetailFactory {
             "Permite adicionar controle e otimizações sem alterar o objeto original. Por outro lado, adiciona uma camada extra que pode aumentar a complexidade do sistema.",
         };
         break;
+      case "CHAIN OF RESPONSIBILITY":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Chain of Responsibility",
+          problem:
+            "Permitir que múltiplos objetos tenham a chance de processar uma requisição sem acoplar o remetente a um receptor específico. É aplicado quando diferentes validações ou processamentos devem ser executados em sequência.",
+          solution:
+            "Encadeia manipuladores que compartilham uma interface comum. Cada manipulador decide se processa a requisição ou a repassa para o próximo da cadeia.",
+          consequence:
+            "Reduz o acoplamento entre remetente e receptor e permite adicionar ou alterar etapas facilmente. Por outro lado, pode ser difícil garantir que a requisição será sempre tratada.",
+        };
+        break;
+      case "COMMAND":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Command",
+          problem:
+            "Desacoplar quem solicita uma operação de quem a executa. É aplicado quando é necessário parametrizar ações, enfileirar requisições ou suportar operações como desfazer (undo).",
+          solution:
+            "Encapsula uma requisição em um objeto (Command), contendo todas as informações necessárias para sua execução. Um invoker dispara o comando, enquanto o receiver executa a lógica real.",
+          consequence:
+            "Permite maior flexibilidade ao desacoplar remetente e executor, além de facilitar funcionalidades como histórico e undo. Por outro lado, aumenta o número de classes no sistema.",
+        };
+        break;
+      case "ITERATOR":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Iterator",
+          problem:
+            "Permitir percorrer elementos de uma coleção sem expor sua estrutura interna. É aplicado quando a coleção possui uma representação complexa ou quando se deseja diferentes formas de iteração.",
+          solution:
+            "Define um objeto iterador responsável por acessar os elementos da coleção sequencialmente. A coleção fornece esse iterador, ocultando sua estrutura interna do cliente.",
+          consequence:
+            "Simplifica o acesso aos elementos e desacopla a lógica de iteração da coleção. Por outro lado, pode adicionar complexidade ao introduzir novas classes ou interfaces.",
+        };
+        break;
       default:
         throw new Error("Padrão não mapeado!");
     }

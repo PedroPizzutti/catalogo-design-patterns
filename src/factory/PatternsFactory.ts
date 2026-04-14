@@ -112,9 +112,9 @@ export class PatternsFactory {
             category: "BEHAVIORAL",
             name: "Chain of Responsibility",
             description:
-              "Permite passar solicitações por uma corrente de manipuladores até que um deles a processe.",
+              "Encadeia múltiplos manipuladores que processam uma requisição em sequência, podendo tratá-la ou repassá-la adiante.",
             useWhen:
-              "Seu programa precisa processar diferentes tipos de pedidos de várias maneiras, mas o tipo exato de pedido é desconhecido.",
+              "Você precisa aplicar múltiplas etapas de processamento (como validações) sem acoplar quem envia a requisição a quem a processa.",
           },
           {
             category: "BEHAVIORAL",
