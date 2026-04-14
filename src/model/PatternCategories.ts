@@ -20,3 +20,9 @@ export function getPatternCategory(url: string) {
     (category) => category.url === url,
   )?.key;
 }
+
+export function getPatternUrl(pattern: PatternCategories) {
+  return Object.values(PatternCategoriesInfo).find(
+    (category) => pattern === category.key,
+  )?.url;
+}

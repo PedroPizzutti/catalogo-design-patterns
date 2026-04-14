@@ -17,7 +17,10 @@ export function App() {
             <Route path="/*" element={<Navigate to="/inicio" replace />} />
             <Route path="/inicio" element={<Home />} />
             <Route path="/categoria/:category" element={<Category />} />
-            <Route path="/pattern/:pattern" element={<PatternDetail />} />
+            <Route
+              path="/categoria/:category/pattern/:pattern"
+              element={<PatternDetail />}
+            />
           </Routes>
         </Body>
         <Footer />

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Pattern } from "../../model/Pattern";
+import { getPatternUrl } from "../../model/PatternCategories";
 
 interface Props {
   pattern: Pattern;
@@ -8,7 +9,7 @@ interface Props {
 export function Card({ pattern }: Props) {
   return (
     <Link
-      to={`/pattern/${pattern.name}`}
+      to={`/categoria/${getPatternUrl(pattern.category)}/pattern/${pattern.name}`}
       className="group w-full max-w-[360px] h-[275px] flex flex-col bg-surface border border-border rounded-lg p-8 transition-all hover:border-primary cursor-pointer"
     >
       <h3 className="text-xl font-medium text-primary-dark tracking-tight mb-4">

@@ -7,6 +7,7 @@ export class PatternsFactory {
       case "CREATIONAL":
         return [
           {
+            category: "CREATIONAL",
             name: "Singleton",
             description:
               "Garante que uma classe tenha apenas uma instância e fornece um ponto de acesso global a ela.",
@@ -14,6 +15,7 @@ export class PatternsFactory {
               "Você precisa de um controle estrito sobre uma instância global, como em conexões de banco de dados ou logs.",
           },
           {
+            category: "CREATIONAL",
             name: "Factory Method",
             description:
               "Define uma interface para criar um objeto, mas deixa as subclasses decidirem qual classe instanciar.",
@@ -21,6 +23,7 @@ export class PatternsFactory {
               "Você não sabe de antemão os tipos exatos e dependências dos objetos com os quais seu código deve trabalhar.",
           },
           {
+            category: "CREATIONAL",
             name: "Abstract Factory",
             description:
               "Permite produzir famílias de objetos relacionados sem especificar suas classes concretas.",
@@ -28,6 +31,7 @@ export class PatternsFactory {
               "Seu código precisa trabalhar com diversas famílias de produtos relacionados, mas não deve depender das classes concretas deles.",
           },
           {
+            category: "CREATIONAL",
             name: "Builder",
             description:
               "Separa a construção de um objeto complexo da sua representação, permitindo diferentes configurações.",
@@ -35,6 +39,7 @@ export class PatternsFactory {
               "Você precisa criar um objeto com muitos parâmetros opcionais ou quando o processo de construção é muito complexo.",
           },
           {
+            category: "CREATIONAL",
             name: "Prototype",
             description:
               "Permite copiar objetos existentes sem tornar seu código dependente de suas classes.",
@@ -45,6 +50,7 @@ export class PatternsFactory {
       case "STRUCTURAL":
         return [
           {
+            category: "STRUCTURAL",
             name: "Adapter",
             description:
               "Permite que objetos com interfaces incompatíveis colaborem entre si.",
@@ -52,6 +58,7 @@ export class PatternsFactory {
               "Você quer usar uma classe existente, mas a interface dela não é compatível com o resto do seu código.",
           },
           {
+            category: "STRUCTURAL",
             name: "Bridge",
             description:
               "Divide uma classe grande em duas hierarquias separadas (abstração e implementação).",
@@ -59,6 +66,7 @@ export class PatternsFactory {
               "Você quer dividir uma classe que tem várias variantes de uma funcionalidade (ex: diferentes plataformas de exibição).",
           },
           {
+            category: "STRUCTURAL",
             name: "Composite",
             description:
               "Permite compor objetos em estruturas de árvores e trabalhar com elas como se fossem objetos individuais.",
@@ -66,6 +74,7 @@ export class PatternsFactory {
               "Você precisa implementar uma estrutura de objetos em árvore, como menus de interface ou sistemas de arquivos.",
           },
           {
+            category: "STRUCTURAL",
             name: "Decorator",
             description:
               "Permite adicionar novos comportamentos a objetos dinamicamente, colocando-os dentro de invólucros.",
@@ -73,6 +82,7 @@ export class PatternsFactory {
               "Você precisa adicionar responsabilidades a objetos em tempo de execução sem quebrar o código que usa esses objetos.",
           },
           {
+            category: "STRUCTURAL",
             name: "Facade",
             description:
               "Fornece uma interface simplificada para uma biblioteca, um framework ou qualquer sistema complexo.",
@@ -80,6 +90,7 @@ export class PatternsFactory {
               "Você precisa de uma interface limitada, mas clara, para um subsistema complexo ou uma biblioteca de terceiros.",
           },
           {
+            category: "STRUCTURAL",
             name: "Flyweight",
             description:
               "Permite ajustar mais objetos na quantidade disponível de memória compartilhando estados comuns.",
@@ -87,6 +98,7 @@ export class PatternsFactory {
               "Seu programa precisa gerar um número enorme de objetos e o consumo de memória está se tornando um problema.",
           },
           {
+            category: "STRUCTURAL",
             name: "Proxy",
             description:
               "Fornece um substituto ou marcador de lugar para outro objeto para controlar o acesso a ele.",
@@ -97,6 +109,7 @@ export class PatternsFactory {
       case "BEHAVIORAL":
         return [
           {
+            category: "BEHAVIORAL",
             name: "Chain of Responsibility",
             description:
               "Permite passar solicitações por uma corrente de manipuladores até que um deles a processe.",
@@ -104,6 +117,7 @@ export class PatternsFactory {
               "Seu programa precisa processar diferentes tipos de pedidos de várias maneiras, mas o tipo exato de pedido é desconhecido.",
           },
           {
+            category: "BEHAVIORAL",
             name: "Command",
             description:
               "Transforma uma solicitação em um objeto independente que contém todas as informações sobre a mesma.",
@@ -111,6 +125,7 @@ export class PatternsFactory {
               "Você quer parametrizar objetos com operações, agendar execuções ou implementar o recurso de desfazer (Undo).",
           },
           {
+            category: "BEHAVIORAL",
             name: "Iterator",
             description:
               "Permite percorrer elementos de uma coleção sem expor sua representação subjacente.",
@@ -118,6 +133,7 @@ export class PatternsFactory {
               "Sua coleção tem uma estrutura complexa e você quer esconder essa complexidade por razões de segurança ou conveniência.",
           },
           {
+            category: "BEHAVIORAL",
             name: "Mediator",
             description:
               "Reduz dependências caóticas entre objetos, forçando-os a colaborar via um objeto mediador.",
@@ -125,6 +141,7 @@ export class PatternsFactory {
               "É difícil mudar algumas classes porque elas estão muito acopladas a várias outras classes.",
           },
           {
+            category: "BEHAVIORAL",
             name: "Memento",
             description:
               "Permite salvar e restaurar o estado anterior de um objeto sem revelar os detalhes da sua implementação.",
@@ -132,6 +149,7 @@ export class PatternsFactory {
               "Você precisa produzir 'retratos' (snapshots) do estado de um objeto para poder restaurá-lo se necessário.",
           },
           {
+            category: "BEHAVIORAL",
             name: "Observer",
             description:
               "Define um mecanismo de assinatura para notificar múltiplos objetos sobre eventos que acontecem.",
@@ -139,6 +157,7 @@ export class PatternsFactory {
               "Mudanças no estado de um objeto podem precisar mudar outros objetos, e o conjunto de objetos é desconhecido ou dinâmico.",
           },
           {
+            category: "BEHAVIORAL",
             name: "State",
             description:
               "Permite que um objeto altere seu comportamento quando seu estado interno muda.",
@@ -146,6 +165,7 @@ export class PatternsFactory {
               "Você tem um objeto que se comporta de maneira diferente dependendo do seu estado atual e o número de estados é grande.",
           },
           {
+            category: "BEHAVIORAL",
             name: "Strategy",
             description:
               "Define uma família de algoritmos e os torna intercambiáveis em tempo de execução.",
@@ -153,6 +173,7 @@ export class PatternsFactory {
               "Você quer usar diferentes variantes de um algoritmo dentro de um objeto e ser capaz de trocar essas variantes durante a execução.",
           },
           {
+            category: "BEHAVIORAL",
             name: "Template Method",
             description:
               "Define o esqueleto de um algoritmo na superclasse mas deixa as subclasses sobrescreverem etapas específicas.",
@@ -160,6 +181,7 @@ export class PatternsFactory {
               "Você quer permitir que os clientes estendam apenas etapas específicas de um algoritmo, mas não o algoritmo inteiro ou sua estrutura.",
           },
           {
+            category: "BEHAVIORAL",
             name: "Visitor",
             description:
               "Permite separar algoritmos dos objetos nos quais eles operam.",
@@ -167,6 +189,7 @@ export class PatternsFactory {
               "Você precisa realizar uma operação em todos os elementos de uma estrutura de objetos complexa (como uma árvore).",
           },
           {
+            category: "BEHAVIORAL",
             name: "Interpreter",
             description:
               "Define uma representação gramatical para uma linguagem e um intérprete para lidar com ela.",

@@ -1,11 +1,11 @@
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
 import { useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { PatternDetailFactory } from "../../factory/PatternDetailFactory";
 
 export function PatternDetail() {
-  const { pattern } = useParams();
+  const { pattern, category } = useParams();
 
   useEffect(() => {
     hljs.highlightAll();
@@ -15,11 +15,19 @@ export function PatternDetail() {
     const detail = PatternDetailFactory.create(pattern!.toUpperCase());
     return (
       <div className="max-w-6xl mx-auto bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
-        <header className="p-6 text-primary">
-          <h1 className="text-3xl font-bold tracking-tight">{detail.name}</h1>
-          <p className="text-sm opacity-80 mt-1 uppercase tracking-wider">
-            {detail.category}
-          </p>
+        <header className="p-6 text-primary flex items-start justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">{detail.name}</h1>
+            <p className="text-sm opacity-80 mt-1 uppercase tracking-wider">
+              {detail.category}
+            </p>
+          </div>
+          <Link
+            to={`/categoria/${category}`}
+            className="bg-primary rounded-lg w-9 h-9 flex items-center justify-center hover:opacity-80 transition"
+          >
+            <span className="text-surface text-lg leading-none">&times;</span>
+          </Link>
         </header>
 
         <main className="p-8 space-y-8">
