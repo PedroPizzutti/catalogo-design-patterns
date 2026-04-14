@@ -339,33 +339,33 @@ public class Main {
       case "ADAPTER":
         return `
 // Target (interface do seu sistema)
-public interface Pagamento {
-    void processar(double valor);
+public interface Payment {
+    void process(double value);
 }
 
 // Biblioteca de terceiro (não pode alterar)
-public class GatewayPagamento {
+public class GatewayPayment {
     public void checkout(int amountInCents) {
-        System.out.println("Pagamento realizado: " + amountInCents + " centavos");
+        System.out.println("Payment realizado: " + amountInCents + " centavos");
     }
 }
 
 // Adapter
-public class PagamentoAdapter implements Pagamento {
+public class PaymentAdapter implements Payment {
 
-    private GatewayPagamento lib;
+    private GatewayPayment lib;
 
-    public PagamentoAdapter(GatewayPagamento lib) {
+    public PaymentAdapter(GatewayPayment lib) {
         this.lib = lib;
     }
 
     @Override
-    public void processar(double valor) {
+    public void process(double value) {
 
         // Adaptação necessária (regra de domínio)
-        int centavos = (int) (valor * 100);
+        int cents = (int) (value * 100);
 
-        lib.checkout(centavos);
+        lib.checkout(cents);
     }
 }
 
@@ -373,84 +373,439 @@ public class PagamentoAdapter implements Pagamento {
 public class Main {
     public static void main(String[] args) {
 
-        GatewayPagamento libExterna = new GatewayPagamento();
+        GatewayPayment lib = new GatewayPayment();
 
-        Pagamento pagamento = new PagamentoAdapter(libExterna);
+        Payment Payment = new PaymentAdapter(lib);
 
-        pagamento.processar(99.90);
+        Payment.process(99.90);
     }
 }
   `;
       case "BRIDGE":
         return `
-// Implementador (Cor)
-public interface Cor {
-    String aplicarCor();
+// Implementador (Color)
+public interface Color {
+    String applyColor();
 }
 
 // Implementações concretas
-public class Vermelho implements Cor {
-    public String aplicarCor() {
-        return "vermelha";
+public class Red implements Color {
+    public String applyColor() {
+        return "red";
     }
 }
 
-public class Azul implements Cor {
-    public String aplicarCor() {
-        return "azul";
+public class Blue implements Color {
+    public String applyColor() {
+        return "blue";
     }
 }
 
-// Abstração (Roupa)
-public abstract class Roupa {
+// Abstração (Clothing)
+public abstract class Clothing {
 
-    protected Cor cor;
+    protected Color color;
 
-    public Roupa(Cor cor) {
-        this.cor = cor;
+    public Clothing(Color color) {
+        this.color = color;
     }
 
-    public abstract void exibir();
+    public abstract void display();
 }
 
 // Abstrações refinadas
-public class Camiseta extends Roupa {
+public class TShirt extends Clothing {
 
-    public Camiseta(Cor cor) {
-        super(cor);
+    public TShirt(Color color) {
+        super(color);
     }
 
-    public void exibir() {
-        System.out.println("Camiseta " + cor.aplicarCor());
-    }
-}
-
-public class Jaqueta extends Roupa {
-
-    public Jaqueta(Cor cor) {
-        super(cor);
-    }
-
-    public void exibir() {
-        System.out.println("Jaqueta " + cor.aplicarCor());
+    @Override
+    public void display() {
+        System.out.println("T-Shirt " + color.applyColor());
     }
 }
 
-// Uso
+public class Jacket extends Clothing {
+
+    public Jacket(Color color) {
+        super(color);
+    }
+
+    @Override
+    public void display() {
+        System.out.println("Jacket " + color.applyColor());
+    }
+}
+
+// Uso (cliente)
 public class Main {
     public static void main(String[] args) {
 
-        Cor vermelho = new Vermelho();
-        Cor azul = new Azul();
+        Color red = new Red();
+        Color blue = new Blue();
 
-        Roupa r1 = new Camiseta(vermelho);
-        Roupa r2 = new Jaqueta(azul);
+        Clothing c1 = new TShirt(red);
+        Clothing c2 = new Jacket(blue);
 
-        r1.exibir();
-        r2.exibir();
+        c1.display();
+        c2.display();
     }
 }
   `;
+      case "COMPOSITE":
+        return `
+
+import java.util.ArrayList;
+import java.util.List;
+
+// Componente
+interface FileSystemItem {
+    void showDetails();
+}
+
+// Folha (Leaf)
+class File implements FileSystemItem {
+    private String name;
+
+    public File(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void showDetails() {
+        System.out.println("Arquivo: " + name);
+    }
+}
+
+// Composto (Composite)
+class Directory implements FileSystemItem {
+    private String name;
+    private List<FileSystemItem> children = new ArrayList<>();
+
+    public Directory(String name) {
+        this.name = name;
+    }
+
+    public void add(FileSystemItem item) {
+        children.add(item);
+    }
+
+    public void remove(FileSystemItem item) {
+        children.remove(item);
+    }
+
+    @Override
+    public void showDetails() {
+        System.out.println("Diretório: " + name);
+
+        for (FileSystemItem item : children) {
+            item.showDetails(); // delegação
+        }
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        File file1 = new File("documento.txt");
+        File file2 = new File("foto.png");
+
+        Directory folder1 = new Directory("Meus Arquivos");
+        folder1.add(file1);
+        folder1.add(file2);
+
+        Directory root = new Directory("Raiz");
+        root.add(folder1);
+        root.add(new File("leia-me.md"));
+
+        root.showDetails();
+    }
+}
+
+  `;
+      case "DECORATOR":
+        return `
+// Componente
+interface Coffee {
+    String getDescription();
+    double getCost();
+}
+
+// Implementação concreta (objeto base)
+class SimpleCoffee implements Coffee {
+
+    @Override
+    public String getDescription() {
+        return "Simple coffee";
+    }
+
+    @Override
+    public double getCost() {
+        return 5.0;
+    }
+}
+
+// Decorador base
+abstract class CoffeeDecorator implements Coffee {
+
+    protected Coffee coffee;
+
+    public CoffeeDecorator(Coffee coffee) {
+        this.coffee = coffee;
+    }
+
+    @Override
+    public String getDescription() {
+        return coffee.getDescription();
+    }
+
+    @Override
+    public double getCost() {
+        return coffee.getCost();
+    }
+}
+
+// Decoradores concretos
+class MilkDecorator extends CoffeeDecorator {
+
+    public MilkDecorator(Coffee coffee) {
+        super(coffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return coffee.getDescription() + ", milk";
+    }
+
+    @Override
+    public double getCost() {
+        return coffee.getCost() + 2.0;
+    }
+}
+
+class SugarDecorator extends CoffeeDecorator {
+
+    public SugarDecorator(Coffee coffee) {
+        super(coffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return coffee.getDescription() + ", sugar";
+    }
+
+    @Override
+    public double getCost() {
+        return coffee.getCost() + 1.0;
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        Coffee coffee = new SimpleCoffee();
+
+        // Adicionando comportamentos dinamicamente
+        coffee = new MilkDecorator(coffee);
+        coffee = new SugarDecorator(coffee);
+
+        System.out.println(coffee.getDescription());
+        System.out.println("Total: $" + coffee.getCost());
+    }
+}
+
+  `;
+      case "FACADE":
+        return `
+  
+  // Subsystems
+class InventoryService {
+    public boolean checkStock(String product) {
+        System.out.println("Checking stock for: " + product);
+        return true;
+    }
+}
+
+class PaymentService {
+    public void processPayment(String product) {
+        System.out.println("Processing payment for: " + product);
+    }
+}
+
+class ShippingService {
+    public void shipProduct(String product) {
+        System.out.println("Shipping product: " + product);
+    }
+}
+
+// Facade
+class OrderFacade {
+
+    private InventoryService inventoryService = new InventoryService();
+    private PaymentService paymentService = new PaymentService();
+    private ShippingService shippingService = new ShippingService();
+
+    public void placeOrder(String product) {
+
+        if (!inventoryService.checkStock(product)) {
+            System.out.println("Product out of stock");
+            return;
+        }
+
+        paymentService.processPayment(product);
+        shippingService.shipProduct(product);
+
+        System.out.println("Order completed successfully");
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        OrderFacade orderFacade = new OrderFacade();
+        orderFacade.placeOrder("Notebook");
+
+    }
+}
+
+  `;
+      case "FLYWEIGHT":
+        return `
+import java.util.HashMap;
+import java.util.Map;
+
+// Flyweight (tipo do inimigo - estado compartilhado)
+class EnemyType {
+    private String name;
+
+    public EnemyType(String name) {
+        this.name = name;
+    }
+
+    public void render(int x, int y) {
+        System.out.println(name + " at (" + x + ", " + y + ")");
+    }
+}
+
+// Factory
+class EnemyFactory {
+    private static final Map<String, EnemyType> types = new HashMap<>();
+
+    public static EnemyType getEnemyType(String name) {
+        if (!types.containsKey(name)) {
+            types.put(name, new EnemyType(name));
+        }
+        return types.get(name);
+    }
+}
+
+// Contexto (estado extrínseco)
+class Enemy {
+    private int x;
+    private int y;
+    private EnemyType type;
+
+    public Enemy(int x, int y, EnemyType type) {
+        this.x = x;
+        this.y = y;
+        this.type = type;
+    }
+
+    public void render() {
+        type.render(x, y);
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        // Criando vários inimigos
+        for (int i = 0; i < 3; i++) {
+            EnemyType goomba = EnemyFactory.getEnemyType("Goomba");
+            Enemy enemy = new Enemy(i * 10, i * 5, goomba);
+            enemy.render();
+        }
+
+        for (int i = 0; i < 2; i++) {
+            EnemyType koopa = EnemyFactory.getEnemyType("Koopa");
+            Enemy enemy = new Enemy(i * 7, i * 3, koopa);
+            enemy.render();
+        }
+
+        // Verificando reuso
+        EnemyType e1 = EnemyFactory.getEnemyType("Goomba");
+        EnemyType e2 = EnemyFactory.getEnemyType("Goomba");
+
+        System.out.println("Mesmo tipo? " + (e1 == e2));
+    }
+}
+
+  `;
+      case "PROXY":
+        return `
+    interface UserService {
+    void getUserData(String userId);
+}
+
+// Real Subject
+class UserServiceImpl implements UserService {
+
+    @Override
+    public void getUserData(String userId) {
+        System.out.println("Fetching user data for: " + userId);
+    }
+}
+
+// Proxy (simulando um "filter")
+class UserServiceProxy implements UserService {
+
+    private UserService userService;
+
+    public UserServiceProxy(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Override
+    public void getUserData(String userId) {
+
+        // Antes da chamada (ex: autenticação)
+        if (!isAuthenticated()) {
+            System.out.println("Access denied");
+            return;
+        }
+
+        System.out.println("Logging request for user: " + userId);
+
+        // Delega para o serviço real
+        userService.getUserData(userId);
+
+        // Depois da chamada
+        System.out.println("Request finished");
+    }
+
+    private boolean isAuthenticated() {
+        return true; // simulação
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        UserService service = new UserServiceImpl();
+
+        // Proxy envolve o serviço real
+        UserService proxy = new UserServiceProxy(service);
+
+        proxy.getUserData("123");
+    }
+}
+    `;
       default:
         throw new Error("Categoria não mapeada!");
     }

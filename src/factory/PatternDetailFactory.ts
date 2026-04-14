@@ -89,6 +89,66 @@ export class PatternDetailFactory {
             "Reduz o acoplamento e melhora a extensibilidade ao permitir combinações dinâmicas. Em contrapartida, aumenta o número de classes e pode tornar o design mais complexo inicialmente.",
         };
         break;
+      case "COMPOSITE":
+        detail = {
+          category: "STRUCTURAL",
+          name: "Composite",
+          problem:
+            "Permitir que objetos individuais e composições de objetos sejam tratados de forma uniforme. É aplicado quando há uma estrutura hierárquica em forma de árvore, como diretórios e arquivos.",
+          solution:
+            "Define uma interface comum para objetos simples e compostos. Objetos compostos armazenam uma coleção de elementos filhos e delegam operações a eles, permitindo que o cliente trate todos os elementos da mesma forma.",
+          consequence:
+            "Simplifica o código cliente ao permitir tratar objetos individuais e compostos de forma uniforme. Por outro lado, pode tornar o design mais genérico e dificultar a restrição de tipos específicos na hierarquia.",
+        };
+        break;
+      case "DECORATOR":
+        detail = {
+          category: "STRUCTURAL",
+          name: "Decorator",
+          problem:
+            "Adicionar responsabilidades a objetos de forma dinâmica sem modificar sua estrutura original. É aplicado quando a herança geraria uma explosão de subclasses para cada combinação de comportamentos.",
+          solution:
+            "Define uma interface comum e cria classes decoradoras que envolvem o objeto original, adicionando novos comportamentos antes ou depois de delegar a chamada. Isso permite combinar funcionalidades de forma flexível em tempo de execução.",
+          consequence:
+            "Oferece grande flexibilidade ao permitir compor comportamentos dinamicamente. Por outro lado, pode aumentar o número de classes e tornar o fluxo de execução mais difícil de entender.",
+        };
+        break;
+      case "FACADE":
+        detail = {
+          category: "STRUCTURAL",
+          name: "Facade",
+          problem:
+            "Simplificar a interação com um subsistema complexo composto por múltiplas classes e responsabilidades. É aplicado quando o cliente precisa realizar operações comuns sem lidar diretamente com toda a complexidade interna.",
+          solution:
+            "Cria uma classe Facade que encapsula a lógica de interação com o subsistema, expondo métodos simples e específicos. O cliente utiliza apenas a Facade, sem precisar conhecer os detalhes das implementações internas.",
+          consequence:
+            "Reduz a complexidade para o cliente e diminui o acoplamento com o subsistema. Por outro lado, pode se tornar um ponto central com muitas responsabilidades se não for bem controlado.",
+        };
+        break;
+      case "FLYWEIGHT":
+        detail = {
+          category: "STRUCTURAL",
+          name: "Flyweight",
+          problem:
+            "Reduzir o consumo de memória ao lidar com um grande número de objetos semelhantes. É aplicado quando muitos objetos compartilham estados comuns e a criação individual se torna custosa.",
+          solution:
+            "Separa o estado intrínseco (compartilhado) do estado extrínseco (variável). Os objetos Flyweight armazenam apenas o estado compartilhado, enquanto o estado variável é fornecido externamente pelo cliente. Uma fábrica garante o reuso das instâncias existentes.",
+          consequence:
+            "Reduz significativamente o uso de memória ao compartilhar objetos. Em contrapartida, aumenta a complexidade ao exigir separação de estados e controle externo do estado variável.",
+        };
+        break;
+      case "PROXY":
+        detail = {
+          category: "STRUCTURAL", // Padrão Estrutural
+          name: "Proxy",
+          problem:
+            "Controlar o acesso a um objeto que pode ser caro de criar ou que precisa de regras adicionais antes de ser utilizado.",
+          solution:
+            "Cria um objeto proxy que implementa a mesma interface do objeto real. O proxy controla o acesso, podendo adicionar lógica como cache, validação ou inicialização preguiçosa antes de delegar a chamada ao objeto real.",
+          consequence:
+            "Permite adicionar controle e otimizações sem alterar o objeto original. Por outro lado, adiciona uma camada extra que pode aumentar a complexidade do sistema.",
+        };
+        break;
       default:
         throw new Error("Padrão não mapeado!");
     }
