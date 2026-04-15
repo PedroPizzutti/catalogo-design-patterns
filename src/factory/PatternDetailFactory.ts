@@ -185,6 +185,103 @@ export class PatternDetailFactory {
             "Simplifica o acesso aos elementos e desacopla a lógica de iteração da coleção. Por outro lado, pode adicionar complexidade ao introduzir novas classes ou interfaces.",
         };
         break;
+      case "MEDIATOR":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Mediator",
+          problem:
+            "Reduzir o acoplamento entre objetos que precisam se comunicar, evitando dependências diretas entre eles.",
+          solution:
+            "Introduz um objeto mediador que centraliza a comunicação entre os componentes. Em vez de se comunicarem diretamente, os objetos interagem através do mediador.",
+          consequence:
+            "Reduz o acoplamento entre componentes e centraliza a lógica de interação. Por outro lado, o mediador pode se tornar complexo ao concentrar muitas responsabilidades.",
+        };
+        break;
+
+      case "MEMENTO":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Memento",
+          problem:
+            "Permitir salvar e restaurar o estado de um objeto sem violar seu encapsulamento.",
+          solution:
+            "Captura o estado interno de um objeto em um memento e permite restaurá-lo posteriormente. O objeto original cria e consome o memento, enquanto um caretaker armazena esses estados.",
+          consequence:
+            "Facilita a implementação de funcionalidades como undo e histórico. Por outro lado, pode aumentar o consumo de memória ao armazenar múltiplos estados.",
+        };
+        break;
+      case "OBSERVER":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Observer",
+          problem:
+            "Permitir que múltiplos objetos sejam notificados automaticamente quando o estado de outro objeto muda.",
+          solution:
+            "Define uma relação de dependência onde um objeto (subject) mantém uma lista de observadores e os notifica sempre que ocorre uma mudança de estado.",
+          consequence:
+            "Permite comunicação desacoplada entre objetos. Por outro lado, pode dificultar o rastreamento do fluxo de execução.",
+        };
+        break;
+      case "STATE":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "State",
+          problem:
+            "Permitir que um objeto altere seu comportamento quando seu estado interno muda, evitando o uso excessivo de condicionais.",
+          solution:
+            "Encapsula os diferentes estados em classes separadas, permitindo que o objeto delegue o comportamento ao estado atual.",
+          consequence:
+            "Elimina condicionais complexas e melhora a organização do código. Por outro lado, aumenta o número de classes no sistema.",
+        };
+        break;
+      case "STRATEGY":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Strategy",
+          problem:
+            "Permitir que um objeto utilize diferentes algoritmos ou comportamentos sem depender de condicionais complexas.",
+          solution:
+            "Define uma família de algoritmos em classes separadas e permite que sejam intercambiáveis através de uma interface comum.",
+          consequence:
+            "Elimina condicionais e facilita a extensão de novos comportamentos. Por outro lado, aumenta o número de classes.",
+        };
+        break;
+      case "TEMPLATE METHOD":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Template Method",
+          problem:
+            "Permitir reutilizar a estrutura de um algoritmo enquanto algumas etapas podem variar entre implementações.",
+          solution:
+            "Define o fluxo do algoritmo em um método da classe base, delegando etapas específicas para subclasses implementarem.",
+          consequence:
+            "Promove reutilização e padronização de processos. Por outro lado, limita a flexibilidade ao depender de herança.",
+        };
+        break;
+      case "VISITOR":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Visitor",
+          problem:
+            "Permitir adicionar novas operações a uma estrutura de objetos sem alterar suas classes.",
+          solution:
+            "Separa as operações em objetos visitantes, que são passados para os elementos da estrutura. Cada elemento aceita o visitante e delega a execução da operação.",
+          consequence:
+            "Facilita a adição de novas operações sem modificar as classes existentes. Por outro lado, dificulta a adição de novos tipos de elementos.",
+        };
+        break;
+      case "INTERPRETER":
+        detail = {
+          category: "BEHAVIORAL",
+          name: "Interpreter",
+          problem:
+            "Interpretar expressões de uma linguagem específica de forma estruturada e extensível.",
+          solution:
+            "Define uma representação para a gramática da linguagem e implementa um interpretador que avalia as expressões com base nessa estrutura.",
+          consequence:
+            "Facilita a extensão da linguagem e a adição de novas regras. Por outro lado, pode se tornar complexo para gramáticas grandes.",
+        };
+        break;
       default:
         throw new Error("Padrão não mapeado!");
     }

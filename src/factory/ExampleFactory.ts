@@ -990,6 +990,558 @@ public class Main {
     }
 }
     `;
+      case "MEDIATOR":
+        return `
+// Mediator
+interface Mediator {
+    void notify(Object sender, String event);
+}
+
+// Concrete Mediator
+class NotificationMediator implements Mediator {
+
+    private Logger logger;
+    private EmailService emailService;
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
+    public void setEmailService(EmailService emailService) {
+        this.emailService = emailService;
+    }
+
+    @Override
+    public void notify(Object sender, String event) {
+
+        if (event.equals("USER_CREATED")) {
+            logger.log("User created");
+            emailService.send("Welcome email");
+        }
+    }
+}
+
+// Colleague
+class UserService {
+
+    private Mediator mediator;
+
+    public UserService(Mediator mediator) {
+        this.mediator = mediator;
+    }
+
+    public void createUser() {
+        System.out.println("User created");
+        mediator.notify(this, "USER_CREATED");
+    }
+}
+
+class Logger {
+
+    public void log(String message) {
+        System.out.println("Log: " + message);
+    }
+}
+
+class EmailService {
+
+    public void send(String message) {
+        System.out.println("Email: " + message);
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        NotificationMediator mediator = new NotificationMediator();
+
+        Logger logger = new Logger();
+        EmailService email = new EmailService();
+
+        mediator.setLogger(logger);
+        mediator.setEmailService(email);
+
+        UserService userService = new UserService(mediator);
+
+        userService.createUser();
+    }
+}
+
+  `;
+      case "MEMENTO":
+        return `
+// Memento
+class EditorMemento {
+    private final String content;
+
+    public EditorMemento(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
+    }
+}
+
+// Originator
+class Editor {
+
+    private String content = "";
+
+    public void type(String text) {
+        content += text;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public EditorMemento save() {
+        return new EditorMemento(content);
+    }
+
+    public void restore(EditorMemento memento) {
+        this.content = memento.getContent();
+    }
+}
+
+// Caretaker
+class History {
+    private java.util.Stack<EditorMemento> stack = new java.util.Stack<>();
+
+    public void push(EditorMemento memento) {
+        stack.push(memento);
+    }
+
+    public EditorMemento pop() {
+        return stack.pop();
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        Editor editor = new Editor();
+        History history = new History();
+
+        editor.type("Hello ");
+        history.push(editor.save());
+
+        editor.type("World");
+        history.push(editor.save());
+
+        System.out.println(editor.getContent()); // Hello World
+
+        editor.restore(history.pop());
+        System.out.println(editor.getContent()); // Hello World
+
+        editor.restore(history.pop());
+        System.out.println(editor.getContent()); // Hello 
+    }
+}
+
+  `;
+      case "OBSERVER":
+        return `
+// Observer
+interface Observer {
+    void update(String message);
+}
+
+// Subject
+class EventManager {
+
+    private java.util.List<Observer> observers = new java.util.ArrayList<>();
+
+    public void subscribe(Observer observer) {
+        observers.add(observer);
+    }
+
+    public void unsubscribe(Observer observer) {
+        observers.remove(observer);
+    }
+
+    public void notifyObservers(String message) {
+        for (Observer observer : observers) {
+            observer.update(message);
+        }
+    }
+}
+
+// Concrete Observers
+class EmailListener implements Observer {
+
+    @Override
+    public void update(String message) {
+        System.out.println("Email received: " + message);
+    }
+}
+
+class LogListener implements Observer {
+
+    @Override
+    public void update(String message) {
+        System.out.println("Log: " + message);
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        EventManager manager = new EventManager();
+
+        manager.subscribe(new EmailListener());
+        manager.subscribe(new LogListener());
+
+        // Dispara evento
+        manager.notifyObservers("User created");
+    }
+}
+  `;
+      case "STATE":
+        return `
+// State
+interface State {
+    void handle(Document document);
+}
+
+// Concrete States
+class DraftState implements State {
+
+    @Override
+    public void handle(Document document) {
+        System.out.println("Document moved to review");
+        document.setState(new ReviewState());
+    }
+}
+
+class ReviewState implements State {
+
+    @Override
+    public void handle(Document document) {
+        System.out.println("Document approved and published");
+        document.setState(new PublishedState());
+    }
+}
+
+class PublishedState implements State {
+
+    @Override
+    public void handle(Document document) {
+        System.out.println("Document is already published");
+    }
+}
+
+// Context
+class Document {
+
+    private State state;
+
+    public Document() {
+        this.state = new DraftState();
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public void next() {
+        state.handle(this);
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        Document doc = new Document();
+
+        doc.next(); // Draft → Review
+        doc.next(); // Review → Published
+        doc.next(); // Já publicado
+    }
+}
+  `;
+      case "STRATEGY":
+        return `
+
+// Strategy
+interface DiscountStrategy {
+    double apply(double value);
+}
+
+// Concrete Strategies
+class NoDiscount implements DiscountStrategy {
+
+    @Override
+    public double apply(double value) {
+        return value;
+    }
+}
+
+class TenPercentDiscount implements DiscountStrategy {
+
+    @Override
+    public double apply(double value) {
+        return value * 0.9;
+    }
+}
+
+class TwentyPercentDiscount implements DiscountStrategy {
+
+    @Override
+    public double apply(double value) {
+        return value * 0.8;
+    }
+}
+
+// Context
+class ShoppingCart {
+
+    private DiscountStrategy strategy;
+
+    public void setStrategy(DiscountStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public double checkout(double value) {
+        return strategy.apply(value);
+    }
+}
+
+// Uso
+public class Main {
+    public static void main(String[] args) {
+
+        ShoppingCart cart = new ShoppingCart();
+
+        cart.setStrategy(new NoDiscount());
+        System.out.println(cart.checkout(100)); // 100
+
+        cart.setStrategy(new TenPercentDiscount());
+        System.out.println(cart.checkout(100)); // 90
+
+        cart.setStrategy(new TwentyPercentDiscount());
+        System.out.println(cart.checkout(100)); // 80
+    }
+}
+  `;
+      case "TEMPLATE METHOD":
+        return `
+// Abstract Class
+abstract class DataProcessor {
+
+    // Template Method (define o fluxo)
+    public final void process() {
+        readData();
+        processData();
+        saveData();
+    }
+
+    protected abstract void readData();
+    protected abstract void processData();
+
+    // Implementação padrão
+    protected void saveData() {
+        System.out.println("Saving data...");
+    }
+}
+
+// Concrete Class
+class CSVProcessor extends DataProcessor {
+
+    @Override
+    protected void readData() {
+        System.out.println("Reading CSV file");
+    }
+
+    @Override
+    protected void processData() {
+        System.out.println("Processing CSV data");
+    }
+}
+
+// Outra implementação
+class JSONProcessor extends DataProcessor {
+
+    @Override
+    protected void readData() {
+        System.out.println("Reading JSON file");
+    }
+
+    @Override
+    protected void processData() {
+        System.out.println("Processing JSON data");
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        DataProcessor csv = new CSVProcessor();
+        csv.process();
+
+        System.out.println("---");
+
+        DataProcessor json = new JSONProcessor();
+        json.process();
+    }
+}
+  `;
+      case "VISITOR":
+        return `
+// Visitor
+interface ShapeVisitor {
+    void visit(Circle circle);
+    void visit(Rectangle rectangle);
+}
+
+// Element
+interface Shape {
+    void accept(ShapeVisitor visitor);
+}
+
+// Concrete Elements
+class Circle implements Shape {
+
+    public double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public void accept(ShapeVisitor visitor) {
+        visitor.visit(this);
+    }
+}
+
+class Rectangle implements Shape {
+
+    public double width;
+    public double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public void accept(ShapeVisitor visitor) {
+        visitor.visit(this);
+    }
+}
+
+// Concrete Visitor
+class AreaCalculator implements ShapeVisitor {
+
+    @Override
+    public void visit(Circle circle) {
+        double area = Math.PI * circle.radius * circle.radius;
+        System.out.println("Circle area: " + area);
+    }
+
+    @Override
+    public void visit(Rectangle rectangle) {
+        double area = rectangle.width * rectangle.height;
+        System.out.println("Rectangle area: " + area);
+    }
+}
+
+// Outro Visitor
+class DescriptionVisitor implements ShapeVisitor {
+
+    @Override
+    public void visit(Circle circle) {
+        System.out.println("Circle with radius " + circle.radius);
+    }
+
+    @Override
+    public void visit(Rectangle rectangle) {
+        System.out.println("Rectangle " + rectangle.width + "x" + rectangle.height);
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        Shape[] shapes = {
+            new Circle(2),
+            new Rectangle(3, 4)
+        };
+
+        ShapeVisitor area = new AreaCalculator();
+        ShapeVisitor description = new DescriptionVisitor();
+
+        for (Shape shape : shapes) {
+            shape.accept(area);
+            shape.accept(description);
+        }
+    }
+}
+
+  `;
+      case "INTERPRETER":
+        return `
+
+// Expression
+interface Expression {
+    boolean interpret(String context);
+}
+
+// Terminal Expression
+class ContainsExpression implements Expression {
+
+    private String word;
+
+    public ContainsExpression(String word) {
+        this.word = word;
+    }
+
+    @Override
+    public boolean interpret(String context) {
+        return context.contains(word);
+    }
+}
+
+// Non-terminal Expression
+class AndExpression implements Expression {
+
+    private Expression left;
+    private Expression right;
+
+    public AndExpression(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public boolean interpret(String context) {
+        return left.interpret(context) && right.interpret(context);
+    }
+}
+
+// Uso (cliente)
+public class Main {
+    public static void main(String[] args) {
+
+        Expression hasJava = new ContainsExpression("Java");
+        Expression hasBackend = new ContainsExpression("Backend");
+
+        Expression rule = new AndExpression(hasJava, hasBackend);
+
+        String text = "Java Backend Developer";
+
+        System.out.println(rule.interpret(text)); // true
+    }
+}
+
+  `;
       default:
         throw new Error("Categoria não mapeada!");
     }
