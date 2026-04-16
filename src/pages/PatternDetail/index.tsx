@@ -3,6 +3,7 @@ import "highlight.js/styles/atom-one-dark.css";
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { PatternDetailFactory } from "../../factory/PatternDetailFactory";
+import type { PatternNames } from "../../model/PatternNames";
 
 export function PatternDetail() {
   const { pattern, category } = useParams();
@@ -12,26 +13,29 @@ export function PatternDetail() {
   }, []);
 
   try {
-    const detail = PatternDetailFactory.create(pattern!.toUpperCase());
+    const detail = PatternDetailFactory.create(pattern as PatternNames);
     return (
-      <div className="max-w-6xl mx-auto bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
-        <header className="p-6 text-primary flex items-start justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">{detail.name}</h1>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
+        <header className="relative p-4 sm:p-6 text-primary">
+          <div className="pr-12">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
+              {detail.name}
+            </h1>
             <p className="text-sm opacity-80 mt-1 uppercase tracking-wider">
               {detail.category}
             </p>
           </div>
+
           <Link
             to={`/categoria/${category}`}
-            className="bg-primary rounded-lg w-9 h-9 flex items-center justify-center hover:opacity-80 transition"
+            className="absolute top-4 right-4 bg-primary rounded-lg w-10 h-10 flex items-center justify-center hover:opacity-80 transition"
           >
             <span className="text-surface text-lg leading-none">&times;</span>
           </Link>
         </header>
 
-        <main className="p-8 space-y-8">
-          <div className="grid gap-6">
+        <main className="p-4 sm:p-8 space-y-6 sm:space-y-8">
+          <div className="space-y-6">
             <section>
               <h2 className="text-primary-dark font-bold text-lg mb-1">
                 O Problema
@@ -54,13 +58,12 @@ export function PatternDetail() {
             </section>
           </div>
 
-          {/* Bloco de Código - Minimalista */}
           <section>
             <h2 className="text-primary-dark font-bold text-lg mb-4">
               Exemplo de implementação
             </h2>
             <div className="bg-primary-dark rounded-md p-5 overflow-x-auto">
-              <pre className="text-sm font-mono leading-relaxed text-surface bg-transparent">
+              <pre className="text-xs sm:text-sm font-mono leading-relaxed text-surface bg-transparent whitespace-pre-wrap sm:whitespace-pre break-words sm:overflow-x-auto">
                 <code className="language-java bg-transparent">
                   {detail.example}
                 </code>

@@ -1,14 +1,15 @@
 import { type PatternDetail } from "../model/PatternDetail";
+import type { PatternNames } from "../model/PatternNames";
 import { ExampleFactory } from "./ExampleFactory";
 
 export class PatternDetailFactory {
-  public static create(name: string): PatternDetail {
+  public static create(name: PatternNames): PatternDetail {
     let detail: Omit<PatternDetail, "example">;
     switch (name) {
       case "SINGLETON":
         detail = {
           category: "CREATIONAL",
-          name: "Singleton",
+          name: "SINGLETON",
           problem:
             "Garantir que uma classe tenha apenas uma instância e fornecer um ponto de acesso global a ela. É aplicado quando o compartilhamento de um recurso (como um pool de conexões ou log) exige um ponto único de controle para evitar estados inconsistentes.",
           solution:
@@ -20,7 +21,7 @@ export class PatternDetailFactory {
       case "FACTORY METHOD":
         detail = {
           category: "CREATIONAL",
-          name: "Factory Method",
+          name: "FACTORY METHOD",
           problem:
             "Definir uma interface para criar um objeto, mas permitir que subclasses decidam qual classe concreta instanciar. É aplicado quando uma classe não pode antecipar o tipo de objeto que deve criar ou deseja delegar essa responsabilidade para subclasses.",
           solution:
@@ -32,7 +33,7 @@ export class PatternDetailFactory {
       case "ABSTRACT FACTORY":
         detail = {
           category: "CREATIONAL",
-          name: "Abstract Factory",
+          name: "ABSTRACT FACTORY",
           problem:
             "Criar famílias de objetos relacionados garantindo que sejam compatíveis entre si. É aplicado quando diferentes variações de um sistema (como canais de notificação) exigem comportamentos consistentes entre seus componentes.",
           solution:
@@ -44,7 +45,7 @@ export class PatternDetailFactory {
       case "BUILDER":
         detail = {
           category: "CREATIONAL",
-          name: "Builder",
+          name: "BUILDER",
           problem:
             "Construir objetos complexos com múltiplos parâmetros opcionais sem criar construtores com muitas variações. É aplicado quando a criação do objeto envolve várias etapas ou combinações de configuração.",
           solution:
@@ -56,7 +57,7 @@ export class PatternDetailFactory {
       case "PROTOTYPE":
         detail = {
           category: "CREATIONAL",
-          name: "Prototype",
+          name: "PROTOTYPE",
           problem:
             "Criar novos objetos copiando instâncias existentes, evitando custo de criação e acoplamento com classes concretas.",
           solution:
@@ -68,7 +69,7 @@ export class PatternDetailFactory {
       case "ADAPTER":
         detail = {
           category: "STRUCTURAL",
-          name: "Adapter",
+          name: "ADAPTER",
           problem:
             "Permitir que classes com interfaces incompatíveis trabalhem juntas. É aplicado quando se deseja reutilizar uma biblioteca de terceiro ou código legado, mas sua interface não corresponde à esperada pelo sistema.",
           solution:
@@ -80,7 +81,7 @@ export class PatternDetailFactory {
       case "BRIDGE":
         detail = {
           category: "STRUCTURAL",
-          name: "Bridge",
+          name: "BRIDGE",
           problem:
             "Evitar a explosão de subclasses quando uma abstração possui múltiplas variações independentes. É aplicado quando tanto a abstração quanto sua implementação podem evoluir separadamente.",
           solution:
@@ -92,7 +93,7 @@ export class PatternDetailFactory {
       case "COMPOSITE":
         detail = {
           category: "STRUCTURAL",
-          name: "Composite",
+          name: "COMPOSITE",
           problem:
             "Permitir que objetos individuais e composições de objetos sejam tratados de forma uniforme. É aplicado quando há uma estrutura hierárquica em forma de árvore, como diretórios e arquivos.",
           solution:
@@ -104,7 +105,7 @@ export class PatternDetailFactory {
       case "DECORATOR":
         detail = {
           category: "STRUCTURAL",
-          name: "Decorator",
+          name: "DECORATOR",
           problem:
             "Adicionar responsabilidades a objetos de forma dinâmica sem modificar sua estrutura original. É aplicado quando a herança geraria uma explosão de subclasses para cada combinação de comportamentos.",
           solution:
@@ -116,7 +117,7 @@ export class PatternDetailFactory {
       case "FACADE":
         detail = {
           category: "STRUCTURAL",
-          name: "Facade",
+          name: "FACADE",
           problem:
             "Simplificar a interação com um subsistema complexo composto por múltiplas classes e responsabilidades. É aplicado quando o cliente precisa realizar operações comuns sem lidar diretamente com toda a complexidade interna.",
           solution:
@@ -128,7 +129,7 @@ export class PatternDetailFactory {
       case "FLYWEIGHT":
         detail = {
           category: "STRUCTURAL",
-          name: "Flyweight",
+          name: "FLYWEIGHT",
           problem:
             "Reduzir o consumo de memória ao lidar com um grande número de objetos semelhantes. É aplicado quando muitos objetos compartilham estados comuns e a criação individual se torna custosa.",
           solution:
@@ -140,7 +141,7 @@ export class PatternDetailFactory {
       case "PROXY":
         detail = {
           category: "STRUCTURAL", // Padrão Estrutural
-          name: "Proxy",
+          name: "PROXY",
           problem:
             "Controlar o acesso a um objeto que pode ser caro de criar ou que precisa de regras adicionais antes de ser utilizado.",
           solution:
@@ -152,7 +153,7 @@ export class PatternDetailFactory {
       case "CHAIN OF RESPONSIBILITY":
         detail = {
           category: "BEHAVIORAL",
-          name: "Chain of Responsibility",
+          name: "CHAIN OF RESPONSIBILITY",
           problem:
             "Permitir que múltiplos objetos tenham a chance de processar uma requisição sem acoplar o remetente a um receptor específico. É aplicado quando diferentes validações ou processamentos devem ser executados em sequência.",
           solution:
@@ -164,7 +165,7 @@ export class PatternDetailFactory {
       case "COMMAND":
         detail = {
           category: "BEHAVIORAL",
-          name: "Command",
+          name: "COMMAND",
           problem:
             "Desacoplar quem solicita uma operação de quem a executa. É aplicado quando é necessário parametrizar ações, enfileirar requisições ou suportar operações como desfazer (undo).",
           solution:
@@ -176,7 +177,7 @@ export class PatternDetailFactory {
       case "ITERATOR":
         detail = {
           category: "BEHAVIORAL",
-          name: "Iterator",
+          name: "ITERATOR",
           problem:
             "Permitir percorrer elementos de uma coleção sem expor sua estrutura interna. É aplicado quando a coleção possui uma representação complexa ou quando se deseja diferentes formas de iteração.",
           solution:
@@ -188,7 +189,7 @@ export class PatternDetailFactory {
       case "MEDIATOR":
         detail = {
           category: "BEHAVIORAL",
-          name: "Mediator",
+          name: "MEDIATOR",
           problem:
             "Reduzir o acoplamento entre objetos que precisam se comunicar, evitando dependências diretas entre eles.",
           solution:
@@ -201,7 +202,7 @@ export class PatternDetailFactory {
       case "MEMENTO":
         detail = {
           category: "BEHAVIORAL",
-          name: "Memento",
+          name: "MEMENTO",
           problem:
             "Permitir salvar e restaurar o estado de um objeto sem violar seu encapsulamento.",
           solution:
@@ -213,7 +214,7 @@ export class PatternDetailFactory {
       case "OBSERVER":
         detail = {
           category: "BEHAVIORAL",
-          name: "Observer",
+          name: "OBSERVER",
           problem:
             "Permitir que múltiplos objetos sejam notificados automaticamente quando o estado de outro objeto muda.",
           solution:
@@ -225,7 +226,7 @@ export class PatternDetailFactory {
       case "STATE":
         detail = {
           category: "BEHAVIORAL",
-          name: "State",
+          name: "STATE",
           problem:
             "Permitir que um objeto altere seu comportamento quando seu estado interno muda, evitando o uso excessivo de condicionais.",
           solution:
@@ -237,7 +238,7 @@ export class PatternDetailFactory {
       case "STRATEGY":
         detail = {
           category: "BEHAVIORAL",
-          name: "Strategy",
+          name: "STRATEGY",
           problem:
             "Permitir que um objeto utilize diferentes algoritmos ou comportamentos sem depender de condicionais complexas.",
           solution:
@@ -249,7 +250,7 @@ export class PatternDetailFactory {
       case "TEMPLATE METHOD":
         detail = {
           category: "BEHAVIORAL",
-          name: "Template Method",
+          name: "TEMPLATE METHOD",
           problem:
             "Permitir reutilizar a estrutura de um algoritmo enquanto algumas etapas podem variar entre implementações.",
           solution:
@@ -261,7 +262,7 @@ export class PatternDetailFactory {
       case "VISITOR":
         detail = {
           category: "BEHAVIORAL",
-          name: "Visitor",
+          name: "VISITOR",
           problem:
             "Permitir adicionar novas operações a uma estrutura de objetos sem alterar suas classes.",
           solution:
@@ -273,7 +274,7 @@ export class PatternDetailFactory {
       case "INTERPRETER":
         detail = {
           category: "BEHAVIORAL",
-          name: "Interpreter",
+          name: "INTERPRETER",
           problem:
             "Interpretar expressões de uma linguagem específica de forma estruturada e extensível.",
           solution:

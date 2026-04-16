@@ -19,7 +19,7 @@ export function Header() {
         >
           Padrões de Projeto
         </Link>
-        <nav className="flex flex-wrap justify-center gap-4 md:text-right md:gap-6">
+        <nav className="flex flex-wrap justify-center gap-2 md:gap-6">
           {links.map((link) => {
             const isActive =
               location.pathname === link.to ||
@@ -31,7 +31,7 @@ export function Header() {
                 to={link.to}
                 className={`
                   rounded-md transition
-                  text-2xl drop-shadow-md 
+                  text-lg md:text-2xl drop-shadow-md 
                   ${isActive ? "text-content" : "hover:text-primary-dark text-content-secondary"}
                 `}
               >
