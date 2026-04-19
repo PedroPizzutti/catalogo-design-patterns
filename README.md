@@ -27,7 +27,7 @@ Os padrões estão organizados em três categorias:
 git clone https://github.com/PedroPizzutti/catalogo-design-patterns
 
 # Acesse a pasta
-cd seu-repo
+cd catalogo-design-patterns
 
 # Instale as dependências
 npm install
