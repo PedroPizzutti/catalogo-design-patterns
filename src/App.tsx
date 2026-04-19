@@ -9,7 +9,7 @@ import PatternDetail from "./pages/PatternDetail";
 
 export function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/catalogo-padroes-projeto">
       <Layout>
         <Header />
         <Body>
