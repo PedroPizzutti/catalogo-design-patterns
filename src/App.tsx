@@ -14,11 +14,11 @@ export function App() {
         <Header />
         <Body>
           <Routes>
-            <Route path="/*" element={<Navigate to="/inicio" replace />} />
-            <Route path="/inicio" element={<Home />} />
-            <Route path="/categoria/:category" element={<Category />} />
+            <Route path="/*" element={<Navigate to="inicio" replace />} />
+            <Route path="inicio" element={<Home />} />
+            <Route path="categoria/:category" element={<Category />} />
             <Route
-              path="/categoria/:category/pattern/:pattern"
+              path="categoria/:category/padrao/:pattern"
               element={<PatternDetail />}
             />
           </Routes>

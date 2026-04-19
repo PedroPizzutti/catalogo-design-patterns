@@ -13,7 +13,9 @@ export function PatternDetail() {
   }, []);
 
   try {
-    const detail = PatternDetailFactory.create(pattern as PatternNames);
+    const detail = PatternDetailFactory.create(
+      pattern?.toUpperCase() as PatternNames,
+    );
     return (
       <div className="max-w-6xl mx-auto px-4 sm:px-6 bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
         <header className="relative p-4 sm:p-6 text-primary">
