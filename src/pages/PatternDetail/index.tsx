@@ -62,11 +62,9 @@ export function PatternDetail() {
             <h2 className="text-primary-dark font-bold text-lg mb-4">
               Exemplo de implementação
             </h2>
-            <div className="bg-primary-dark rounded-md p-5 overflow-x-auto">
-              <pre className="text-xs sm:text-sm font-mono leading-relaxed text-surface bg-transparent whitespace-pre-wrap sm:whitespace-pre break-words sm:overflow-x-auto">
-                <code className="language-java bg-transparent">
-                  {detail.example}
-                </code>
+            <div className="bg-primary-dark rounded-md p-5">
+              <pre className="text-xs sm:text-sm font-mono leading-relaxed text-surface whitespace-pre-wrap break-all">
+                <code className="language-java">{detail.example}</code>
               </pre>
             </div>
           </section>
